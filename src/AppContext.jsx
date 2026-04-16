@@ -29,9 +29,9 @@ function ls_set(key, val) {
 
 /* ── Default data ────────────────────────────────────────────────── */
 const DEFAULT_USER = {
-  name:        'Lekhan',
+  name:        'Alex',
   calorieGoal: 2000,
-  weight:      '',
+  weight:      '60',
   notifs:      true,
   darkMode:    false,
 };
