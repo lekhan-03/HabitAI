@@ -1,0 +1,384 @@
+@import "tailwindcss";
+
+
+/* ── Base ─────────────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: #E5E7EB;
+  margin: 0;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+/* ── Keyframes ────────────────────────────────────────────────────── */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.93);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slide-sheet {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes toast-life {
+  0% {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  12% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  80% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+}
+
+@keyframes check-pop {
+  0% {
+    transform: scale(0);
+  }
+
+  65% {
+    transform: scale(1.25);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse-dot {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.35;
+  }
+}
+
+@keyframes ring-grow {
+  0% {
+    transform: scale(0.85);
+    opacity: 0.6;
+  }
+
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+@keyframes analyze-pulse {
+
+  0%,
+  100% {
+    opacity: 0.45;
+    transform: scale(0.98);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.02);
+  }
+}
+
+/* ── Animation classes ────────────────────────────────────────────── */
+.anim-fade-up {
+  animation: fade-up 0.32s ease-out both;
+}
+
+.anim-fade-in {
+  animation: fade-in 0.22s ease-out both;
+}
+
+.anim-scale-in {
+  animation: scale-in 0.22s cubic-bezier(.16, 1, .3, 1) both;
+}
+
+.anim-sheet {
+  animation: slide-sheet 0.38s cubic-bezier(.16, 1, .3, 1) both;
+}
+
+.anim-toast {
+  animation: toast-life 3.7s ease-in-out forwards;
+}
+
+.anim-check {
+  animation: check-pop 0.22s cubic-bezier(.36, .07, .19, .97) both;
+}
+
+.anim-spin {
+  animation: spin-slow 1.8s linear infinite;
+}
+
+.anim-analyze {
+  animation: analyze-pulse 1.8s ease-in-out infinite;
+}
+
+/* ── Progress ring ────────────────────────────────────────────────── */
+.ring-track {
+  fill: none;
+  stroke: #F3F4F6;
+  stroke-width: 8;
+}
+
+.ring-fill {
+  fill: none;
+  stroke-width: 8;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.7s cubic-bezier(.16, 1, .3, 1);
+  transform-origin: center;
+  transform: rotate(-90deg);
+}
+
+/* ── Toggle Switch ────────────────────────────────────────────────── */
+.toggle-wrap {
+  width: 44px;
+  height: 26px;
+  border-radius: 13px;
+  background: #E5E7EB;
+  position: relative;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  flex-shrink: 0;
+}
+
+.toggle-wrap.on {
+  background: #4F46E5;
+}
+
+.toggle-knob {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: white;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.18);
+  transition: transform 0.2s cubic-bezier(.16, 1, .3, 1);
+}
+
+.toggle-wrap.on .toggle-knob {
+  transform: translateX(18px);
+}
+
+/* ── Habit circle ─────────────────────────────────────────────────── */
+.habit-circle {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 1.75px solid #D1D5DB;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.15s ease, border-color 0.15s ease;
+  cursor: pointer;
+}
+
+.habit-circle.done {
+  background: #10B981;
+  border-color: #10B981;
+}
+
+/* ── Editable macro cell ──────────────────────────────────────────── */
+.macro-cell {
+  flex: 1;
+  text-align: center;
+  padding: 12px 6px;
+  border: 1.5px solid #E5E7EB;
+  border-radius: 12px;
+  background: white;
+  cursor: text;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.macro-cell:focus-within {
+  border-color: #C7D2FE;
+  background: #EEF2FF;
+}
+
+.macro-cell input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  text-align: center;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #111827;
+}
+
+/* ── Nav tab ──────────────────────────────────────────────────────── */
+.nav-tab {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 10px 4px 6px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #9CA3AF;
+  position: relative;
+  transition: color 0.15s;
+}
+
+.nav-tab.active {
+  color: #4F46E5;
+}
+
+.nav-tab.active::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 24%;
+  right: 24%;
+  height: 2px;
+  background: #4F46E5;
+  border-radius: 0 0 2px 2px;
+}
+
+.nav-label {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+/* ── Card ─────────────────────────────────────────────────────────── */
+.card {
+  background: white;
+  border-radius: 16px;
+  border: 1px solid #F3F4F6;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.03);
+}
+
+/* ── Inline add ───────────────────────────────────────────────────── */
+.inline-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 0.9375rem;
+  color: #111827;
+}
+
+.inline-input::placeholder {
+  color: #D1D5DB;
+}
+
+/* ── Goal input ───────────────────────────────────────────────────── */
+.goal-input {
+  width: 100%;
+  border: 1.5px solid #E5E7EB;
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: #111827;
+  outline: none;
+  background: white;
+  transition: border-color 0.15s;
+  font-family: inherit;
+}
+
+.goal-input:focus {
+  border-color: #A5B4FC;
+}
+
+/* ── FAB ──────────────────────────────────────────────────────────── */
+.fab {
+  position: absolute;
+  bottom: 86px;
+  right: 20px;
+  z-index: 10;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #4F46E5;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(79, 70, 229, 0.38);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.fab:hover {
+  transform: scale(1.07);
+  box-shadow: 0 6px 26px rgba(79, 70, 229, 0.48);
+}
+
+.fab:active {
+  transform: scale(0.95);
+}
